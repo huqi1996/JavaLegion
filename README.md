@@ -1,1 +1,1 @@
-# JavaLegion
+# CodeWars
