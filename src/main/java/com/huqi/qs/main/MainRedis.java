@@ -1,8 +1,13 @@
 package com.huqi.qs.main;
 
+import com.sun.xml.internal.ws.api.message.Attachment;
 import redis.clients.jedis.Jedis;
 
+import javax.management.RuntimeErrorException;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.locks.Condition;
+import java.util.stream.Collectors;
 
 /**
  * @author huqi
@@ -84,11 +89,18 @@ public class MainRedis {
         System.out.println(jedis.get("key007"));
         // 整数型的value，自增范围是signed long的最大最小值
         // System.out.println(jedis.incr("key007"));
+
+        // list
+        System.out.println(jedis.rpush("list001", "value001", "value002", "value003"));
+        System.out.println(jedis.llen("list001"));
+        System.out.println(jedis.lpop("list001"));
+        System.out.println(jedis.rpop("list001"));
+        System.out.println(jedis.lpop("list001"));
+        System.out.println(jedis.rpop("list001"));
     }
 
     public static void main(String[] args) {
         Jedis jedis = connect();
-        getContent190125(jedis);
         getContent190727(jedis);
     }
 }
