@@ -7,8 +7,8 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class Main {
                 RestClient.builder(new HttpHost("localhost", 9200, "http")).build());
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("user", "huqi");
-        jsonMap.put("postDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        jsonMap.put("postDate", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
         jsonMap.put("message", "trying out Elasticsearch");
         IndexRequest indexRequest = new IndexRequest("index", "type", "1")
                 .source(jsonMap);
